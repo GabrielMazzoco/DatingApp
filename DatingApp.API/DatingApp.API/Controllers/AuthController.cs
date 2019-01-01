@@ -54,7 +54,7 @@ namespace DatingApp.API.Controllers
 
             var claims = new[]
             {
-                new Claim(type: ClaimTypes.NameIdentifier, value: userFromRepo.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, value: userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username) 
             };
 
