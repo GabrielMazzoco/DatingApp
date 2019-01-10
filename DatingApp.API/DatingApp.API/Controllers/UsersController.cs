@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
 
 namespace DatingApp.API.Controllers
 {
@@ -52,8 +56,19 @@ namespace DatingApp.API.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdate)
         {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var userFromRepo = await _datingRepository.GetUser(id);
+
+            _mapper.Map(userForUpdate, userFromRepo);
+
+            if (await _datingRepository.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {id} failed on save");
         }
 
         // DELETE: api/ApiWithActions/5
