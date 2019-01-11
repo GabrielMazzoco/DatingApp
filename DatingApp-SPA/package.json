@@ -27,7 +27,9 @@
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^3.0.1",
     "ngx-gallery": "^5.3.2",
+    "ngx-toastr": "^9.1.1",
     "rxjs": "~6.3.3",
+    "toastr": "^2.1.4",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
