@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,7 +7,6 @@ using DatingApp.API.Data;
 using DatingApp.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
 
 namespace DatingApp.API.Controllers
 {
@@ -69,12 +67,6 @@ namespace DatingApp.API.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
