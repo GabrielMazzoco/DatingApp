@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       {
         gender: ['male'],
         username: ["", Validators.required],
-        knowAs: ['', Validators.required],
+        knownAs: ['', Validators.required],
         dateOfBirth: [null, Validators.required],
         city: ['', Validators.required],
         country: ['', Validators.required],
