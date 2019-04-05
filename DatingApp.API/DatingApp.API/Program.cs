@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.IO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace DatingApp.API
 {
@@ -7,11 +9,24 @@ namespace DatingApp.API
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            //var h = new WebHostBuilder();
+            //var environment = h.GetSetting("environment");
+            //var conf = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json", true, true)
+            //    .AddJsonFile($"appsettings.{environment}.json", true)
+            //    .AddEnvironmentVariables()
+            //    .Build();
+
+            CreateWebHostBuilder(args).Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IWebHost CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .UseKestrel()
+                .Build();
+        }
     }
 }
