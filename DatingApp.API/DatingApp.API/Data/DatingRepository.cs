@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Helpers;
 using DatingApp.API.Models;
@@ -37,6 +38,14 @@ namespace DatingApp.API.Data
             users = users.Where(u => u.Id != userParams.UserId);
 
             users = users.Where(u => u.Gender == userParams.Gender);
+
+            if (userParams.MinAge != 18 || userParams.MaxAge != 99)
+            {
+                var minDateOfBirth = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+                var maxDateOfBirth = DateTime.Today.AddYears(-userParams.MinAge);
+
+                users = users.Where(u => u.DateOfBirth >= minDateOfBirth && u.DateOfBirth <= maxDateOfBirth);
+            }
 
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
