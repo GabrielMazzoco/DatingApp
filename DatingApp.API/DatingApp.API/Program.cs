@@ -9,24 +9,11 @@ namespace DatingApp.API
     {
         public static void Main(string[] args)
         {
-            //var h = new WebHostBuilder();
-            //var environment = h.GetSetting("environment");
-            //var conf = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile("appsettings.json", true, true)
-            //    .AddJsonFile($"appsettings.{environment}.json", true)
-            //    .AddEnvironmentVariables()
-            //    .Build();
-
-            CreateWebHostBuilder(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost CreateWebHostBuilder(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseKestrel()
-                .Build();
-        }
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
     }
 }
