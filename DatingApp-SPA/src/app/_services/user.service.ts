@@ -64,4 +64,8 @@ export class UserService {
   deletePhoto(userId: number, id: number) {
     return this.http.delete(this.baseUrl + userId + "/photos/" + id);
   }
+
+  public sendLike(id: number, recipientId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}${id}/like/${recipientId}`, {});
+  }
 }
